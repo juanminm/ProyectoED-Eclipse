@@ -1,6 +1,7 @@
 package org.institutoserpis.ed.juanminm;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Conversation implements Serializable {
 
@@ -10,6 +11,7 @@ public class Conversation implements Serializable {
 	private final Account sender;
 	private final Account recipient;
 	private final String subject;
+	private ArrayList<Message> messageList = new ArrayList<Message>();
 
 	public Conversation(long id, Account sender, Account recipient,
 			String subject) {
@@ -33,5 +35,9 @@ public class Conversation implements Serializable {
 
 	public String getSubject() {
 		return subject;
+	}
+
+	public void addMessage(Message message) {
+		messageList.add(message);
 	}
 }
