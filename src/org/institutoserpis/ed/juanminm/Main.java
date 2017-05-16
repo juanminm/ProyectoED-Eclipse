@@ -25,59 +25,12 @@ public class Main {
 
 		return account;
 	}
-	private static void createAccountForm() {
-		Scanner scan = new Scanner(System.in);
-		String username = null;
-		String password = null;
-		String email = null;
-		boolean validUsername = false;
-		boolean validPassword = false;
-		boolean validEmail = false;
-		boolean ommitedEmail = false;
+
+	private static void storeAccount(String username, String password,
+			String email, boolean ommitedEmail) {
+		boolean status = false;
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
-
-		while (!validUsername) {
-			System.out.println("Introduzca un nombre de usuario: ");
-			username = scan.nextLine();
-
-			if (username.matches("\\w+\\ +\\w+")) {
-				System.err.println("Nombre de usuario invalido. No puede "
-						+ "tener espacios.");;
-			} else {
-				validUsername = true;
-
-			}
-		}
-
-
-		while (!validPassword) {
-			System.out.println("Introduzca una contraseña (min. 6 "
-					+ "caracteres): ");
-			password = scan.nextLine();
-
-			if (password.equals("")) {
-				System.err.println("La contraseña está vacia.");
-			}
-			if (password.matches("\\X{0,5}")) {
-				System.err.println("La contraseña es demasiado corta.");
-			} else {
-				validPassword = true;
-			}
-		}
-
-		while (!validEmail || ommitedEmail) {
-			System.out.println("(Opcional) Introduzca un correo: ");
-			email = scan.nextLine();
-
-			if (email.equals("")) {
-				ommitedEmail = true;
-			} else if (email.matches("\\w+@[a-zA-Z]+\\.[a-zA-Z]{2,}")) {
-				System.err.println("El correo introducizo es invalido.");
-			} else {
-				validEmail = true;
-			}
-		}
 
 		try {
 			File file = new File("accounts.ser");
@@ -107,6 +60,8 @@ public class Main {
 
 			oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(accountList);
+
+			status = true;
 		} catch (ClassNotFoundException | IOException ex) {
 			System.err.println(ex.getMessage());
 		} finally {
@@ -123,15 +78,85 @@ public class Main {
 			}
 		}
 
+		return status;
+	}
+
+	public static boolean isUsernameValid (String s) {
+		return isValid(s, "\\w+\\ +\\w+");
+	}
+
+	public static boolean isPasswordValid (String s) {
+		return isValid(s, "\\X{0,5}");
+	}
+
+	public static boolean isEmailValid (String s) {
+		return isValid(s, "\\w+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}");
+	}
+	private static boolean isValid (String s, String pattern) {
+		if (s.matches(pattern)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public static void createAccountForm() {
+		Scanner scan = new Scanner(System.in);
+		String username = null;
+		String password = null;
+		String email = null;
+		boolean invalidUsername = false;
+		boolean invalidPassword = false;
+		boolean invalidEmail = false;
+		boolean ommitedEmail = false;
+
+
+		do {
+			if (invalidUsername) {
+				System.out.println("El nombre de usuario es incorrecto.");
+			}
+
+			System.out.println("Introduzca un nombre de usuario: ");
+			username = scan.nextLine();
+		} while (invalidUsername = !isUsernameValid(username));
+
+		do {
+			if (invalidPassword) {
+				System.out.println("La contraseña es demasiado corta.");
+			}
+
+			System.out.println("Introduzca una contraseña (min. 6 caracteres): ");
+			password = scan.nextLine();
+		} while (invalidPassword = !isPasswordValid(password));
+
+
+		do {
+			if (invalidEmail) {
+				System.out.println("La dirección de correo introducida es invalida.");
+			}
+			System.out.println("Introduzca una dirección de correo: ");
+			email = scan.nextLine();
+
+			if (email.isEmpty()) {
+				ommitedEmail = true;
+			}
+		} while (!ommitedEmail || (invalidEmail = !isEmailValid(email)));
+
+		if (storeAccount(username, password, email, ommitedEmail)) {
+			System.out.println("La cuenta ha sido correctamente creada.");
+		} else {
+			System.err.println("Hubo un error durante la creación de la "
+					+ "cuenta.");
+		}
+
 		scan.close();
 	}
 
-	private void connecAccount() {
-
+	private static void connectAccount(String username, String password) {
+		//ObjectInputStream
 	}
 
-	private void connecAccountForm() {
-
+	private static void connectAccountForm() {
 	}
 
 	public static void main(String[] args) {
