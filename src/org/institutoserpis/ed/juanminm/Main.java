@@ -81,22 +81,23 @@ public class Main {
 		return status;
 	}
 
-	public static boolean isUsernameValid (String s) {
-		return isValid(s, "\\w+\\ +\\w+");
+	public static boolean isUsernameValid(String s) {
+		return isValid(s, "^\\w+[^\\ ]+\\w+$");
 	}
 
-	public static boolean isPasswordValid (String s) {
-		return isValid(s, "\\X{0,5}");
+	public static boolean isPasswordValid(String s) {
+		return isValid(s, "^[a-zA-Z0-9()`~!@#$%^&\\*\\-\\+=|\\\\\\{}\\[\\]:;\"'<"
+				+ ">,.?\\/]{6,}$");
 	}
 
-	public static boolean isEmailValid (String s) {
-		return isValid(s, "\\w+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}");
+	public static boolean isEmailValid(String s) {
+		return isValid(s, "^[\\w.-]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$");
 	}
 	private static boolean isValid (String s, String pattern) {
 		if (s.matches(pattern)) {
-			return false;
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
