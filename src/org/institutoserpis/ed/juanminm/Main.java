@@ -13,7 +13,7 @@ public class Main {
 
 	private static Account loggedAccount;
 
-	static Account createAccount(long id, String username,
+	public static Account createAccount(long id, String username,
 			String password, String email, boolean ommitedEmail) {
 		Account account;
 
