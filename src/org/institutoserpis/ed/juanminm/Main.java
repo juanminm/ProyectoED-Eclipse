@@ -71,7 +71,7 @@ public class Main {
 				}
 
 				if (oos != null) {
-					ois.close();
+					oos.close();
 				}
 			} catch (IOException ex) {
 				System.err.println(ex.getMessage());
