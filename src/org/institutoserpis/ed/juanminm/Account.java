@@ -7,7 +7,7 @@ public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final long ID;
+	private final long id;
 	private final String username;
 	private String password;
 	private String email;
@@ -17,14 +17,14 @@ public class Account implements Serializable {
 	}
 
 	public Account (long id, String username, String password, String email) {
-		this.ID = id;
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
 	}
 
 	public long getID() {
-		return ID;
+		return id;
 	}
 
 	public String getUsername() {
