@@ -18,9 +18,9 @@ public class Main {
 		Account account;
 
 		if (ommitedEmail) {
-			account = new Account(1, username, password);
+			account = new Account(id, username, password);
 		} else {
-			account = new Account(1, username, password, email);
+			account = new Account(id, username, password, email);
 		}
 
 		return account;
