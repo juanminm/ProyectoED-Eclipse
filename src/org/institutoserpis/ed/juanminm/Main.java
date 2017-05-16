@@ -26,7 +26,7 @@ public class Main {
 		return account;
 	}
 
-	private static void storeAccount(String username, String password,
+	private static boolean storeAccount(String username, String password,
 			String email, boolean ommitedEmail) {
 		boolean status = false;
 		ObjectInputStream ois = null;
