@@ -1,6 +1,7 @@
 package org.institutoserpis.ed.juanminm;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Account implements Serializable {
 
@@ -44,5 +45,23 @@ public class Account implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Account) {
+			final Account a = (Account) o;
+
+			return Objects.equals(id, a.id)
+					&& Objects.equals(username, a.username)
+					&& Objects.equals(password, a.password)
+					&& Objects.equals(email, a.email);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+	    return Objects.hash(id, username, password, email);
 	}
 }
