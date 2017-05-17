@@ -226,7 +226,7 @@ public class Main {
 	private static void showLogginMenu() {
 		System.out.println("Conectado como: juanmi");
 		System.out.println();
-		System.out.println("1. Nueva conversación.");
+		System.out.println("1. Conversar.");
 		System.out.println("2. Listar conversaciones.");
 		System.out.println("3. Listar conversaciones no leidas.");
 		System.out.println("4. Eliminar historial de una conversación.");
