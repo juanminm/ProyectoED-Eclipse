@@ -9,18 +9,14 @@ public class Conversation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final long ID;
-	private final Account sender;
-	private final Account recipient;
-	private final String subject;
+	private final Account[] correspondants = new Account[2];
 	private Calendar lastUpdated;
 	private ArrayList<Message> messageList = new ArrayList<Message>();
 
-	public Conversation(long id, Account sender, Account recipient,
-			String subject) {
+	public Conversation(long id, Account a1, Account a2) {
 		this.ID = id;
-		this.sender = sender;
-		this.recipient = recipient;
-		this.subject = subject;
+		this.correspondants[0] = a1;
+		this.correspondants[1] = a2;
 		this.lastUpdated = Calendar.getInstance();
 	}
 
@@ -28,18 +24,17 @@ public class Conversation implements Serializable {
 		return ID;
 	}
 
-	public Account getSender() {
-		return sender;
+	public Account getCorrespondant(int i) {
+		return correspondants[i];
 	}
 
-	public Account getRecipient() {
-		return recipient;
 	public Calendar getLastUpdated() {
 		return lastUpdated;
 	}
 
-	public String getSubject() {
-		return subject;
+	public boolean isCorrespondant(String username) {
+		return username.equals(correspondants[0].getUsername())
+				|| username.equals(correspondants[1].getUsername());
 	}
 
 	public void addMessage(Message message) {
