@@ -120,7 +120,7 @@ public class Main {
 				System.out.println("El nombre de usuario es incorrecto.");
 			}
 
-			System.out.println("Introduzca un nombre de usuario: ");
+			System.out.print("Introduzca un nombre de usuario: ");
 			username = scan.nextLine();
 		} while (invalidUsername = !isUsernameValid(username));
 
@@ -140,7 +140,7 @@ public class Main {
 				System.out.println("La dirección de correo introducida es"
 						+ " invalida.");
 			}
-			System.out.println("Introduzca una dirección de correo: ");
+			System.out.print("Introduzca una dirección de correo: ");
 			email = scan.nextLine();
 
 			if (email.isEmpty()) {
