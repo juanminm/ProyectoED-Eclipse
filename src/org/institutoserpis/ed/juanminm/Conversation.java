@@ -2,6 +2,7 @@ package org.institutoserpis.ed.juanminm;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Conversation implements Serializable {
 
@@ -11,6 +12,7 @@ public class Conversation implements Serializable {
 	private final Account sender;
 	private final Account recipient;
 	private final String subject;
+	private Calendar lastUpdated;
 	private ArrayList<Message> messageList = new ArrayList<Message>();
 
 	public Conversation(long id, Account sender, Account recipient,
@@ -19,6 +21,7 @@ public class Conversation implements Serializable {
 		this.sender = sender;
 		this.recipient = recipient;
 		this.subject = subject;
+		this.lastUpdated = Calendar.getInstance();
 	}
 
 	public long getID() {
@@ -31,6 +34,8 @@ public class Conversation implements Serializable {
 
 	public Account getRecipient() {
 		return recipient;
+	public Calendar getLastUpdated() {
+		return lastUpdated;
 	}
 
 	public String getSubject() {
@@ -39,5 +44,6 @@ public class Conversation implements Serializable {
 
 	public void addMessage(Message message) {
 		messageList.add(message);
+		lastUpdated = message.getDate();
 	}
 }

@@ -1,6 +1,7 @@
 package org.institutoserpis.ed.juanminm;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 public class Message implements Serializable {
 
@@ -8,10 +9,12 @@ public class Message implements Serializable {
 
 	private final long messageID;
 	private final String messageBody;
+	private final Calendar date;
 
 	public Message (long messageID, String messageBody) {
 		this.messageID = messageID;
 		this.messageBody = messageBody;
+		this.date = Calendar.getInstance();
 	}
 
 	public long getMessageID() {
@@ -20,5 +23,9 @@ public class Message implements Serializable {
 
 	public String getMessageBody() {
 		return messageBody;
+	}
+
+	public Calendar getDate() {
+		return date;
 	}
 }
