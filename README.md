@@ -2,3 +2,5 @@
 
 Proyecto con el uso del IDE Eclipse para la asignatura Entornos de Desarrollo
 del ciclo Desarrollo de Aplicaciones Multiplataforma. 
+
+Por favor, no usarlo como aplicación diaria.
