@@ -168,22 +168,32 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		if (loggedAccount == null) {
+		boolean salir = false;
 
-		} else {
-			System.out.println("Programa de chat");
-			System.out.println("1. Crear cuenta");
-			System.out.println();
-			System.out.print("Opcion: ");
-			int opcion = scan.nextInt();
-			scan.nextLine();
-			switch(opcion) {
-			case 1:
-				createAccountForm();
-			default:
-				System.out.println("Opción invalida. Finalizando...");
+		do {
+			if (loggedAccount != null) {
+				//TODO
+				salir = true;
+			} else {
+				System.out.println("Programa de chat");
+				System.out.println("1. Crear cuenta.");
+				System.out.println("0. Salir.");
+				System.out.print("Opcion: ");
+				int opcion = scan.nextInt();
+				scan.nextLine();
+				switch(opcion) {
+					case 0:
+						System.out.println("Saliendo.");
+						salir = true;
+						break;
+					case 1:
+						createAccountForm();
+						break;
+					default:
+						System.out.println("Opción invalida.");
+				}
 			}
-		}
+		} while(!salir);
 		scan.close();
 	}
 
