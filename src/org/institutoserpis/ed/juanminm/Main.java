@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
 
@@ -63,7 +65,7 @@ public class Main {
 
 			status = true;
 		} catch (ClassNotFoundException | IOException ex) {
-			System.err.println(ex.getMessage());
+			Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
 				if (ois != null) {
@@ -74,7 +76,8 @@ public class Main {
 					oos.close();
 				}
 			} catch (IOException ex) {
-				System.err.println(ex.getMessage());
+				Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null,
+					ex);
 			}
 		}
 
