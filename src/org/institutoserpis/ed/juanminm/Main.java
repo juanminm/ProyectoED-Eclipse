@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -166,28 +167,97 @@ public class Main {
 		//TODO
 	}
 
+	private static void showLogginMenu() {
+		System.out.println("Conectado como: juanmi");
+		System.out.println();
+		System.out.println("1. Nueva conversación.");
+		System.out.println("2. Listar conversaciones.");
+		System.out.println("3. Listar conversaciones no leidas.");
+		System.out.println("4. Eliminar historial de una conversación.");
+		System.out.println("5. Eliminar todo el historial.");
+		System.out.println("6. Desconectarse.");
+		System.out.println("0. Desconectarse y cerrar.");
+	}
+
+	private static void showMainMenu() {
+		System.out.println();
+		System.out.println("Programa de chat");
+		System.out.println();
+		System.out.println("1. Crear cuenta.");
+		System.out.println("2. Conectarse.");
+		System.out.println("0. Cerrar.");
+		System.out.print("Opcion: ");
+ 	}
+
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		boolean salir = false;
 
 		do {
+			System.out.println("Programa de chat");
 			if (loggedAccount != null) {
-				//TODO
-				salir = true;
+				int opcion;
+
+				showLogginMenu();
+				try {
+					opcion = scan.nextInt();
+				} catch (InputMismatchException ex) {
+					opcion = -1;
+				} finally {
+					scan.nextLine();
+				}
+
+				switch (opcion) {
+					case 0 :
+						System.out.println("Cerrando...");
+						loggedAccount = null;
+						salir = true;
+						break;
+					case 1:
+						//TODO
+						break;
+					case 2:
+						//TODO
+						break;
+					case 3:
+						//TODO
+						break;
+					case 4:
+						//TODO
+						break;
+					case 5:
+						//TODO
+						break;
+					case 6:
+						loggedAccount = null;
+						System.out.println("Desconectado. Plues ENTER para"
+								+ "continuar...");
+						scan.nextLine();
+						break;
+				}
+
 			} else {
-				System.out.println("Programa de chat");
-				System.out.println("1. Crear cuenta.");
-				System.out.println("0. Salir.");
-				System.out.print("Opcion: ");
-				int opcion = scan.nextInt();
-				scan.nextLine();
+				int opcion;
+
+				showMainMenu();
+				try {
+					opcion = scan.nextInt();
+				} catch (InputMismatchException ex) {
+					opcion = -1;
+				} finally {
+					scan.nextLine();
+				}
+
 				switch(opcion) {
 					case 0:
-						System.out.println("Saliendo.");
+						System.out.println("Cerrando...");
 						salir = true;
 						break;
 					case 1:
 						createAccountForm();
+						break;
+					case 2:
+						connectAccountForm();
 						break;
 					default:
 						System.out.println("Opción invalida.");
