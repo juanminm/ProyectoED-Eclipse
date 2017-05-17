@@ -29,26 +29,35 @@ public class Main {
 		return account;
 	}
 
+	private static ArrayList<Account> getAccountList()
+			throws ClassNotFoundException, IOException {
+		ObjectInputStream ois = null;
+		AccountList accountList = null;
+
+		File file = new File("accounts.ser");
+
+		if (file.exists()) {
+			ois = new ObjectInputStream(new FileInputStream(file));
+			accountList = (AccountList) ois.readObject();
+		} else {
+			file.createNewFile();
+			accountList = new AccountList();
+		}
+
+		return accountList.getAccounts();
+	}
+
 	private static boolean storeAccount(String username, String password,
 			String email, boolean ommitedEmail) {
 		boolean status = false;
-		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
 
 		try {
 			File file = new File("accounts.ser");
-			AccountList accountList;
 			ArrayList<Account> accList;
+			AccountList accountList = new AccountList();
 
-			if (file.exists()) {
-				ois = new ObjectInputStream(new FileInputStream(file));
-				accountList = (AccountList) ois.readObject();
-			} else {
-				file.createNewFile();
-				accountList = new AccountList();
-			}
-
-			accList = accountList.getAccounts();
+			accList = getAccountList();
 			if (accList.isEmpty()) {
 				accList.add(createAccount(1, username, password, email,
 						ommitedEmail));
@@ -69,10 +78,6 @@ public class Main {
 			Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
-				if (ois != null) {
-					ois.close();
-				}
-
 				if (oos != null) {
 					oos.close();
 				}
