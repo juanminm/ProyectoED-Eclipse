@@ -89,8 +89,8 @@ public class Main {
 	}
 
 	public static boolean isPasswordValid(String s) {
-		return isValid(s, "^[a-zA-Z0-9()`~!@#$%^&\\*\\-\\+=|\\\\\\{}\\[\\]:;\"'<"
-				+ ">,.?\\/]{6,}$");
+		return isValid(s, "^[a-zA-Z0-9()`~!@#$%^&\\*\\-\\+=|\\\\\\{}\\[\\]:;\"'"
+				+ "<>,.?\\/]{6,}$");
 	}
 
 	public static boolean isEmailValid(String s) {
@@ -129,14 +129,16 @@ public class Main {
 				System.out.println("La contraseña es demasiado corta.");
 			}
 
-			System.out.println("Introduzca una contraseña (min. 6 caracteres): ");
+			System.out.print("Introduzca una contraseña (min. 6"
+					+ " caracteres): ");
 			password = scan.nextLine();
 		} while (invalidPassword = !isPasswordValid(password));
 
 
 		do {
 			if (invalidEmail) {
-				System.out.println("La dirección de correo introducida es invalida.");
+				System.out.println("La dirección de correo introducida es"
+						+ " invalida.");
 			}
 			System.out.println("Introduzca una dirección de correo: ");
 			email = scan.nextLine();
