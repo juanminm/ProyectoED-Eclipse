@@ -159,12 +159,63 @@ public class Main {
 		scan.close();
 	}
 
-	private static void connectAccount(String username, String password) {
-		//TODO
+	public static Account connectAccount(String username, String password) {
+		ObjectInputStream ois = null;
+		AccountList accountList;
+		ArrayList<Account> accList;
+		Account targetAccount = null;
+
+		try {
+			File file = new File("accounts.ser");
+
+			if (file.exists()) {
+				ois = new ObjectInputStream(new FileInputStream(file));
+				accountList = (AccountList) ois.readObject();
+			} else {
+				file.createNewFile();
+				accountList = new AccountList();
+			}
+
+			accList = accountList.getAccounts();
+
+			for (Account account : accList) {
+				if (account.getUsername().equals(username)
+						&& account.getPassword().equals(password)) {
+					targetAccount = account;
+				}
+			}
+		} catch (IOException | ClassNotFoundException ex) {
+			Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			try {
+				if (ois != null) {
+					ois.close();
+				}
+			} catch (IOException ex) {
+				Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null,
+						ex);
+			}
+		}
+		return targetAccount;
 	}
 
 	private static void connectAccountForm() {
-		//TODO
+		Scanner scan = new Scanner(System.in);
+		Account account;
+		String username;
+		String password;
+
+		System.out.print("Usuario: ");
+		username = scan.nextLine();
+		System.out.print("Contraseña: ");
+		password = scan.nextLine();
+		account = connectAccount(username, password);
+
+		if (account == null) {
+			System.out.println("La cuenta no existe.");
+		}
+
+		scan.close();
 	}
 
 	private static void showLogginMenu() {
@@ -187,7 +238,7 @@ public class Main {
 		System.out.println("2. Conectarse.");
 		System.out.println("0. Cerrar.");
 		System.out.print("Opcion: ");
- 	}
+	}
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
