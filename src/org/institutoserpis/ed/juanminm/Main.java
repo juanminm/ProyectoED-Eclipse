@@ -143,10 +143,10 @@ public class Main {
 			System.out.print("Introduzca una dirección de correo: ");
 			email = scan.nextLine();
 
-			if (email.isEmpty()) {
+			if (email.equals("")) {
 				ommitedEmail = true;
 			}
-		} while (!ommitedEmail || (invalidEmail = !isEmailValid(email)));
+		} while (!ommitedEmail && (invalidEmail = !isEmailValid(email)));
 
 		if (storeAccount(username, password, email, ommitedEmail)) {
 			System.out.println("La cuenta ha sido correctamente creada.");
